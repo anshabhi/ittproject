@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	
+	<link href="css/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<title> View Attendance </title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Facial Attendance System</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                              <ul class="nav navbar-nav navbar-right">
+                    <li>
+                      <a href="teachlaunchattendance.html">Launch Attendance</a>
+                    </li>
+                    <li>
+                        <a href="teachviewattendance.html">View Attendance</a>
+                    </li>
+
+                    
+                    <li>
+                        <a href="insindex.html">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Features Section -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">View Attendance</h2>
+				Kindly use the search feature to select results as required
+            </div>
+            <div class="col-md-12">
+              <div id = "resultdiv" class="table-responsive table-fixed table-bordered w-auto">
+                
+              </div>
+            </div>
+            
+        </div>
+        <!-- /.row -->
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Team Alpha, 2019</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	<script src = "js/jquery.dataTables.min.js"></script>
+
+	<script src = "js/dataTables.bootstrap4.min.js"></script>
+</body>
+<script>
+var xmlhttp;
+
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+  } else {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+		$("#resultdiv").html(xmlhttp.responseText);
+		 $('#result').DataTable();
+
+		
+        }else if (xmlhttp.readyState==4) {
+            document.write(xmlhttp.status + xmlhttp.statusText);
+        }
+}
+var usern = document.getElementById("username");
+var pwd = document.getElementById("password");
+xmlhttp.open("POST","/cgi-bin/insviewattendance.py",true);
+xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8')
+
+xmlhttp.send("username=" + sessionStorage["username"]);
+</script>
+</html>

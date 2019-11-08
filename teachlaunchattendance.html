@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://html5-templates.com/" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	
+	<title> Launch Attendance </title>
+	 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+     <style type="text/css">
+      	.hide{
+      		display: none;
+      	}
+      
+       
+#timediv {
+    background: #fff;
+    text-align: center;
+    
+    color: #000;
+    border: 1px #ccc groove;
+    
+}
+      	.body_time{
+      		background: #17c8e8;
+      		padding: 100px;
+      		width: 58px;
+   			border-radius: 50%;
+        	margin: 15% auto;
+
+      	}
+.swal2-popup {
+  font-size: 1.6rem !important;
+}
+      </style>	
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Facial Attendance System</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                      <a href="teachlaunchattendance.html">Launch Attendance</a>
+                    </li>
+                    <li>
+                        <a href="teachviewattendance.html">View Attendance</a>
+                    </li>
+
+                  
+                    <li>
+                        <a href="insindex.html">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Features Section -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Launch Attendance</h2>
+            </div>
+
+            <div style="text-align:center;padding:1em 0;">
+			<h2>
+<div class="body_" id="body_"><div id="timediv"></div>
+</h2>
+</div>
+            </div>
+            <hr>
+              <div class="col-md-6" style="text-align:right">
+                  <label for="subject"><b>Subject</b></label>
+                  <select id = "subj">
+                    <option value="Internet Tools and Technology">Internet Tools and Technology</option>
+                    <option value="Operating Systems">Operating Systems</option>
+                    <option value="Embedded Systems">Embedded Systems</option>
+                  </select>
+              </div>
+             
+                  <br><br>
+              <div class="col-md-12" style="text-align:center">
+                  <button onclick = 'launch()' class="btn btn-primary">Launch Attendance</button>
+                  <button onclick = 'stop()' class="btn btn-primary">Stop Attendance</button>
+              </div>
+            </hr>
+        </div>
+        <!-- /.row -->
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Team Alpha, 2019</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+<script>
+var sel = document.getElementById("subj");
+function launch(){
+var xmlhttp;
+ Swal.fire({
+  title: 'Changing Status',
+  html: 'Please Wait',
+ // timer: 2000,
+  onBeforeOpen: () => {
+    Swal.showLoading()
+  }
+})
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+  } else {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+						 Swal.fire({
+  icon: 'success',
+  title: 'Attendance Launched Successfully.',
+  text: 'Students can now mark attendance'
+})
+		//alert (xmlhttp.responseText);
+           // document.getElementById("resultText").innerHTML=xmlhttp.responseText;
+        }else if (xmlhttp.readyState==4) {
+            document.write(xmlhttp.status + xmlhttp.statusText);
+        }
+}
+
+xmlhttp.open("POST","/cgi-bin/launch.py",true);
+xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8')
+xmlhttp.send("subject=" + sel.value + "&status=" + 1);
+
+
+}
+function stop(){
+var xmlhttp;
+ Swal.fire({
+  title: 'Changing Status',
+  html: 'Please Wait',
+ // timer: 2000,
+  onBeforeOpen: () => {
+    Swal.showLoading()
+  }
+})
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+  } else {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+			 Swal.fire({
+  icon: 'success',
+  title: 'Attendance Stopped Successfully.',
+  text: 'Students will no longer be able to mark attendance'
+})
+           // document.getElementById("resultText").innerHTML=xmlhttp.responseText;
+        }else if (xmlhttp.readyState==4) {
+            alert("error:" + xmlhttp.status + xmlhttp.statusText);
+        }
+}
+
+xmlhttp.open("POST","/cgi-bin/stop.py",true);
+xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8')
+xmlhttp.send("subject=" + sel.value + "&status=" + 0);
+
+
+}
+
+var interval = setInterval(timestamphome, 1000);
+
+
+
+
+ function timestamphome(){
+ var date;
+date = new Date();
+
+ 
+ var time = document.getElementById('timediv'); 
+ time.innerHTML = date.toLocaleTimeString();
+
+
+  }
+ 
+
+</script>
+</html>

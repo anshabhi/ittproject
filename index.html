@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://html5-templates.com/" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+<title> Facial Attendance System Student Login </title>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Facial Attendance System</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="register.html">SignUp</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Features Section -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Facial Attendance System Student Login</h2>
+            </div>
+            <div class="col-md-8">
+                <img class="img-responsive" src="images/logo.jpg" alt="Manipal Logo" width = "450" height = "700">
+            </div>
+            <hr>
+              <div class="col-md-4">
+                <h3>Login</h3><br><br>
+                <form>
+                  <label for="username"><b>Username</b></label>
+                  <input type="text" id = "username" placeholder="Enter Username" required ><br><br>
+                  <label for="pwd"><b>Password</b></label>
+                  <input type="password" id = "password" placeholder="Enter Password" required ><br><br>
+                  
+                  <a class="btn btn-lg-3 btn-primary btn-block"  onclick = "login()">Login</a>
+                  <br>
+                  <a href="register.html">Not registered?</a>
+                </form>
+              </div>
+            </hr>
+        </div>
+        <!-- /.row -->
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Team Alpha, 2019</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	<script>
+	function login(){
+	var xmlhttp;
+
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+  } else {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+		status = (parseInt(xmlhttp.responseText));
+		if (status != 0)
+			window.location.href = 'studmarkattendance.html';
+		else
+			alert ("Invalid Username or Password");
+           // document.getElementById("resultText").innerHTML=xmlhttp.responseText;
+        }else if (xmlhttp.readyState==4) {
+            document.write(xmlhttp.status + xmlhttp.statusText);
+        }
+}
+var usern = document.getElementById("username");
+var pwd = document.getElementById("password");
+xmlhttp.open("POST","/cgi-bin/login.py",true);
+xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8')
+sessionStorage["username"] = usern.value;
+xmlhttp.send("username=" + usern.value + "&password=" + pwd.value);
+}
+</script>
+</body>
+</html>
