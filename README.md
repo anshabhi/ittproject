@@ -1,12 +1,10 @@
+# Product Functions
 
+The software outside the core product provide the instructor with functionalities like:
 
-#Product Functions
-
-The software outside the core product provide the user with functionalities like:
-
-	1. Storing their name and details in the database.
-	2. Making their attendance in real time with timestamp.
-  3. Recognising the faces with certain accuracy. 
+	1. Storing student's name and details in the database.
+	2. Making student's attendance in real time with timestamp.
+	3. Recognising the faces with good accuracy. 
 
 In the core product, the user is provided with some basic functions like:
 	
@@ -41,10 +39,6 @@ The Device running the software must have the minimum hardware requirements:
 	Directx: Not required
 	Camera: Any functioning camera with a resolution > 4MP
 	Storage: 24MB or higher
-	
-  #User Documentation
-
-No specific documentation is required for the product as it is not proprietary and can be treated as an open source project with an MIT license. The website is quite straightforward and can be learned to operate without any prior knowledge as it contains all the instructions for operating the software.
 
 # User Interfaces
 
